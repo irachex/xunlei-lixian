@@ -765,6 +765,7 @@ class XunleiClient(object):
 	def add_magnet_task(self, link):
 		return self.add_torrent_task_by_link(link)
 
+	@retry(10)
 	def add_torrent_task_by_link(self, link, old_task_id=None):
 		url = 'http://dynamic.cloud.vip.xunlei.com/interface/url_query?callback=queryUrl&u=%s&random=%s' % (urllib.quote(link), current_timestamp())
 		response = self.urlread(url)

@@ -123,7 +123,11 @@ class TaskBase(object):
 				self.client.add_torrent_task_by_content(content)
 			elif bt_type == 'magnet':
 				print 'Adding magnet task', value # TODO: print the thing user inputs (may be not hash)
-				self.client.add_task(value)
+				try:
+					self.client.add_task(value)
+				except Exception as e:
+					import traceback
+					traceback.print_exc()
 			else:
 				raise NotImplementedError(bt_type)
 		self.commit_jobs = [[], []]
